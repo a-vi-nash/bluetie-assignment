@@ -1,0 +1,16 @@
+{
+    "apps" : [{
+      "name"        : "hos-crm-sync",
+      "script"      : "index.js",
+      "args"        : [],
+      "log_date_format" : "YYYY-MM-DD HH:mm Z",
+      "watch"       : false,
+      "ignore_watch": ["logs"],
+      "node_args"   : "",
+      "merge_logs"  : false,
+      "cwd"         : "./",
+      "exec_mode"  : "cluster",
+      "instances": "1",
+      "ignore_watch" : ["node_modules", ".git", "logs","uploads"]
+    }]
+}

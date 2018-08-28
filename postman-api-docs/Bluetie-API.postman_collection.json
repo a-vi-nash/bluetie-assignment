@@ -1,0 +1,103 @@
+{
+	"info": {
+		"name": "Bluetie-API",
+		"_postman_id": "7b26c88b-7fd8-96a3-21b5-bf7bffa2c0d7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"Avinash Shetty\",\n\"email\":\"avinashshettyh@gmail.com\",\n\"password\":\"Avinash@123\"}"
+				},
+				"url": "localhost:8088/user/register",
+				"description": "API to register users"
+			},
+			"response": []
+		},
+		{
+			"name": "user/me",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViODU1NGFlMjVhY2MxNWQzMDk3YjFkMiIsImlhdCI6MTUzNTQ2NDYyMiwiZXhwIjoxNTM1NTUxMDIyfQ.YxPTQqKUT7OEcaH1fKiV_p_6sTeUF3khy__PJFe2kg0"
+					}
+				],
+				"body": {},
+				"url": "localhost:8088/user/me",
+				"description": "gets the user details of the token"
+			},
+			"response": []
+		},
+		{
+			"name": "user/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"email\":\"avinashshettyh@gmail.com\",\n\"password\":\"Avinash@123\"}"
+				},
+				"url": "localhost:8088/user/login",
+				"description": "login to get the new token"
+			},
+			"response": []
+		},
+		{
+			"name": "inspection/Avinash",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViODU1NGFlMjVhY2MxNWQzMDk3YjFkMiIsImlhdCI6MTUzNTQ2NDkyNSwiZXhwIjoxNTM1NTUxMzI1fQ.HwPzn-rL5ikiNalrIjTUH6MT77fTxU8OCO6nBM6UULc"
+					}
+				],
+				"body": {},
+				"url": "localhost:8088/inspection/Avinash",
+				"description": "searches for the inspection details by the given search term in the entire string fields in the inspection collection."
+			},
+			"response": []
+		},
+		{
+			"name": "inspection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViODU1NGFlMjVhY2MxNWQzMDk3YjFkMiIsImlhdCI6MTUzNTQ2NDkyNSwiZXhwIjoxNTM1NTUxMzI1fQ.HwPzn-rL5ikiNalrIjTUH6MT77fTxU8OCO6nBM6UULc"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"venueType\":\"OFFICE\",\n\"location\":{\n\"addressLine1\":\"123\",\n\"addressLine2\":\"45re\",\n\"city\":\"Thane\",\n\"zipCode\":\"400607\"\n},\n\"status\":\"APPROVED\"}"
+				},
+				"url": "localhost:8088/inspection",
+				"description": "saves the inspection details"
+			},
+			"response": []
+		}
+	]
+}

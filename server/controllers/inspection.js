@@ -16,7 +16,7 @@ router.get(
   global.expressJoi.joiValidate(schema.GetInspection),
   (req, res, next) => {
     const searchTerm = req.params.searchTerm || "";
-    Inspection.find({$text: {$search: searchTerm}})
+    Inspection.find({ $text: { $search: searchTerm } })
       .sort({ sortOrder: 1 })
       .then(Inspection => {
         if (!Inspection.length) {
@@ -30,8 +30,8 @@ router.get(
         }
 
         return res
-            .status(global.config.default_success_http_code)
-            .send(Inspection);
+          .status(global.config.default_success_http_code)
+          .send(Inspection);
       })
       .catch(error => {
         throw error;
@@ -43,54 +43,50 @@ router.get(
  * save the inspection details.
  */
 router.post(
-    "/",
-    authenticate,
-    global.expressJoi.joiValidate(schema.SaveInspection),
-    (req, res) => {
-        let inspectionData = {...req.body};
-        
-        //get user details
-        return User.findById(req.userId,'-password')
-                .then(userDetails=>{
-                   if(userDetails.name){
-                       return userDetails;
-                   }
-                   else{
-                       throw new Error("USER_NOT_FOUND");
-                   }
-                })
-                .then(userDetails=>{
-                    inspectionData.inspectorId = userDetails._id.toString();
-                    inspectionData.inspectorName = userDetails.name
-                    let inspection = new Inspection(inspectionData);
-                    return inspection.save().then(
-                        result => {
-                            console.log(result)
-                            return res
-                            .status(global.config.default_success_http_code)
-                            .json({
-                                responseCode: global.config.default_success_http_code,
-                                responseDesc: global.config.default_success_message,
-                                //result:result
-                              })
-                            .send();
-                        })
-                })
-                .catch(error => {
-                if(error.message == "USER_NOT_FOUND"){
-                    return res
-                        .status(global.config.default_not_found_http_code)
-                        .json({
-                        responseCode: global.config.default_not_found_http_code,
-                        responseDesc: global.config.default_not_found_message
-                        })
-                        .send();
-                }
-                throw error;
-            });
+  "/",
+  authenticate,
+  global.expressJoi.joiValidate(schema.SaveInspection),
+  (req, res) => {
+    let inspectionData = { ...req.body };
 
-
-    }
+    //get user details
+    return User.findById(req.userId, "-password")
+      .then(userDetails => {
+        if (userDetails.name) {
+          return userDetails;
+        } else {
+          throw new Error("USER_NOT_FOUND");
+        }
+      })
+      .then(userDetails => {
+        inspectionData.inspectorId = userDetails._id.toString();
+        inspectionData.inspectorName = userDetails.name;
+        let inspection = new Inspection(inspectionData);
+        return inspection.save().then(result => {
+          console.log(result);
+          return res
+            .status(global.config.default_success_http_code)
+            .json({
+              responseCode: global.config.default_success_http_code,
+              responseDesc: global.config.default_success_message
+              //result:result
+            })
+            .send();
+        });
+      })
+      .catch(error => {
+        if (error.message == "USER_NOT_FOUND") {
+          return res
+            .status(global.config.default_not_found_http_code)
+            .json({
+              responseCode: global.config.default_not_found_http_code,
+              responseDesc: global.config.default_not_found_message
+            })
+            .send();
+        }
+        throw error;
+      });
+  }
 );
 
 module.exports = router;

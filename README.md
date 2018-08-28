@@ -50,3 +50,4 @@ Need the following application installed
 	- searchTerm is a mandatory field
 	- searchTerm can contain any text present in the name location and status field.
 	- x-access-token header is required
+- All the API's are there in the postman-api-docs folder, need to import the file to postman and the collection with the name Bluetie-API will be visible on postman.
